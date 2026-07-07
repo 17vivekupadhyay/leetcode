@@ -6,22 +6,23 @@
 #         self.right = right
 from collections import deque
 class Solution:
-    def levelOrder(self, root):
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if root is None:
             return []
-        
-        result = []
+
+        res = []
         queue = deque([root])
-        
+
         while queue:
             level = []
-            for i in range(len(queue)): 
+            for i in range(len(queue)):
                 node = queue.popleft()
                 level.append(node.val)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            result.append(level)
+            res.append(level)
+        return res
+
         
-        return result
