@@ -1,18 +1,19 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         seen = {}
-        for i in range(len(strs)):
-            x = "".join(sorted(strs[i]))
-            if x in seen:
-                seen[x].append(strs[i])
+
+        for s in strs:
+            news = "".join(sorted(s))
+            if news in seen:
+                seen[news] += [s]
             else:
-                seen[x] = [strs[i]]
+                seen[news] = [s]
         
-        builder = []
-        for value in seen:
-            builder.append(seen[value])
+        lst = []
+        for keys in seen:
+            lst.append(seen[keys])
         
-        return builder
+        return lst
 
 
         
