@@ -15,15 +15,12 @@ class Solution:
         back = sum(weights)
 
         while front < back:
-            mid = (front+back) // 2
-
+            mid = (front + back) // 2
+            
             if time(mid) <= days:
                 back = mid
             else:
                 front = mid + 1
 
         return front
-
-
-
-        
+            
