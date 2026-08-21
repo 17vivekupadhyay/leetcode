@@ -1,53 +1,37 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        if len(s1) > len(s2):
-            return False
+        if len(s2) < len(s1):
+            return False   
+        window = len(s1)
+        def make_dict(string):
+            compare = {}
+            for i in range(window):
+                if string[i] in compare:
+                    compare[string[i]] += 1
+                else:
+                    compare[string[i]] = 1
+            return compare
 
-        seen1 = {}
-        for i in range(len(s1)):
-            if s1[i] not in seen1:
-                seen1[s1[i]] = 1
-            else:
-                seen1[s1[i]] += 1
+        s1dict = make_dict(s1)
+        s2dict = make_dict(s2)
 
-        seen2 = {}
-        for i in range(len(s1)):
-            if s2[i] not in seen2:
-                seen2[s2[i]] = 1
-            else:
-                seen2[s2[i]] += 1
-
-
-        front = 0
-        back = len(s1)
-        
-        while back < len(s2):
-            if seen1 == seen2:
+        for i in range(window, len(s2)):
+            if s1dict == s2dict:
                 return True
 
-            if s2[back] not in seen2:
-                seen2[s2[back]] = 1
+            if s2[i] in s2dict:
+                s2dict[s2[i]] += 1
             else:
-                seen2[s2[back]] += 1
+                s2dict[s2[i]] = 1
 
-            seen2[s2[front]] -= 1
+            s2dict[s2[i - window]] -= 1   
 
-            if seen2[s2[front]] == 0:
-                del seen2[s2[front]]
+            if s2dict[s2[i - window]] == 0: 
+                del[s2dict[s2[i - window]]]
 
-            front += 1
-            back += 1
+        return s1dict == s2dict
 
-        return seen1 == seen2
-
+        
             
-
-
-        
-
-        
-        
-
-
 
         
